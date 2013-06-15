@@ -1,0 +1,13 @@
+
+.holder { margin-top: 30px;}
+.unstyled { border: 1px solid #888888; min-height: 300px; padding: 20px;}
+.btn { margin: 10px; width: 90px;}
+    
+.wrongAHolder { display: inline-block; position: relative; }
+    .correctA { position: absolute; background: #fff; border: 1px solid black; border-radius: 5px; padding: 5px; display: none; z-index: 1;
+text-align: center; top: 0;}
+
+.back_btn { float: left; overflow: hidden;}
+.next_btn { float: right; overflow: hidden;}
+
+.QuizApp small { float: right;}
