@@ -1,6 +1,6 @@
 window.WorkoutApp || (window.WorkoutApp = {});
 (function(window, $, _, WorkoutApp, undefined) {
-    var workouts = {
+    var Workouts = {
         1: {
             name: 'some name',
             time: 30,
@@ -8,27 +8,42 @@ window.WorkoutApp || (window.WorkoutApp = {});
 
     };
     
-    
+    //var timer = 10;
     WorkoutApp.init = function () {
-        //this.contDown()
-        this.counter=setInterval(this.contDown, 1000);
+        self = this;
+        self.counter = "";
+        
+        
+        $(".start").on('click', function() {
+            self.callWorkout();
+        });
     };
 
-    WorkoutApp.contDown = function () {
-        timer--;
-        if (timer <= 0) {
-         clearInterval(this.counter);
-         this.callPause()
-         return;
-        }
+    WorkoutApp.contDown = function (timer, caller) {
+        var self = this,
+            counter = setInterval(function() {
+            
+            if (timer < 0) {
+                clearInterval(counter);
+                if (caller === "pause"){
+                    self.callWorkout();    
+                } else {
+                    self.callPause();
+                }
+                return;
+            }
+            $(".WorkoutApp").html(caller + " " + timer + " secs");    
+            timer--;
+        }, 1000);
 
-        $(".WorkoutApp").html(timer + " secs");
-        
     };
 
     WorkoutApp.callPause = function () {
-        //this.contDown()
-        this.counter=setInterval(this.contDown, 1000);
+        this.contDown(11, "pause");
+    };
+
+    WorkoutApp.callWorkout = function () {
+        this.contDown(15, "workout");
     };
 
     $(window.document).ready($.proxy(WorkoutApp.init, WorkoutApp));
