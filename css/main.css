@@ -1,6 +1,7 @@
-
+html, body { height: 100%;}
+.WorkoutApp { color: #000;}
 .holder { margin-top: 30px;}
-.unstyled { border: 1px solid #888888; min-height: 300px; padding: 20px;}
+
 .btn { margin: 10px; width: 90px;}
     
 .wrongAHolder { display: inline-block; position: relative; }

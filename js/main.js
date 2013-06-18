@@ -2,48 +2,59 @@ window.WorkoutApp || (window.WorkoutApp = {});
 (function(window, $, _, WorkoutApp, undefined) {
     var Workouts = {
         1: {
-            name: 'some name',
-            time: 30,
+            name: 'Cucnjevi',
+            bgImg: 'cucnjevi',
+            time: 5
+        },
+        2: {
+            name: "Sklekovi",
+            bgImg: 'sklekovi',
+            time: 5
         }
-
     };
     
-    //var timer = 10;
     WorkoutApp.init = function () {
         self = this;
-        self.counter = "";
-        
+        self.i = 0;
+        self.wokrouts_no = _.size(Workouts);
         
         $(".start").on('click', function() {
             self.callWorkout();
         });
     };
 
-    WorkoutApp.contDown = function (timer, caller) {
-        var self = this,
-            counter = setInterval(function() {
+    WorkoutApp.countdown = function (timer, caller) {
+        var counter = setInterval(function() {
             
             if (timer < 0) {
                 clearInterval(counter);
+
                 if (caller === "pause"){
-                    self.callWorkout();    
+                    self.callWorkout();
                 } else {
                     self.callPause();
                 }
                 return;
             }
-            $(".WorkoutApp").html(caller + " " + timer + " secs");    
+            $(".WorkoutApp").html(caller+ " " +timer+ " secs");
             timer--;
         }, 1000);
-
     };
 
     WorkoutApp.callPause = function () {
-        this.contDown(11, "pause");
+        $('body').css("background", "blue");
+
+        if (this.i === this.wokrouts_no) {
+            $(".WorkoutApp").html("DONE");
+        } else {
+            this.countdown(3, "pause");
+        }
     };
 
     WorkoutApp.callWorkout = function () {
-        this.contDown(15, "workout");
+        this.i++;
+        $("body").css("background", "url('img/" +Workouts[this.i].bgImg+ ".jpg') no-repeat center center #f4f4f4");
+        this.countdown(Workouts[this.i].time, Workouts[this.i].name);
     };
 
     $(window.document).ready($.proxy(WorkoutApp.init, WorkoutApp));
