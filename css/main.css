@@ -12,3 +12,6 @@ text-align: center; top: 0;}
 .next_btn { float: right; overflow: hidden;}
 
 .QuizApp small { float: right;}
+
+.pause,
+.resume { display: none;}

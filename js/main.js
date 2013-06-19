@@ -4,7 +4,7 @@ window.WorkoutApp || (window.WorkoutApp = {});
         1: {
             name: 'Cucnjevi',
             bgImg: 'cucnjevi',
-            time: 5
+            time: 30
         },
         2: {
             name: "Sklekovi",
@@ -38,7 +38,22 @@ window.WorkoutApp || (window.WorkoutApp = {});
             }
             $(".WorkoutApp").html(caller+ " " +timer+ " secs");
             timer--;
-        }, 1000);
+        }, 1000),
+        self = this;
+
+        $('.pause').show();
+
+        $('.pause').on('click', function() {
+            clearInterval(counter);
+            $(this).hide();
+            $('.resume').show()    
+        });
+        $('.resume').on('click', function() {
+            //$(this).addClass('pause').removeClass('resume');
+            self.countdown(timer, caller);
+            $(this).hide();
+            $('.pause').show()
+        });
     };
 
     WorkoutApp.callPause = function () {
